@@ -1,4 +1,5 @@
 import QtQuick
+import QtQml
 import QtQuick.Layouts
 import QtQuick.Controls
 import Qt5Compat.GraphicalEffects
@@ -10,6 +11,24 @@ Item {
     anchors.fill: parent
     height: parent.height
     width: parent.width
+
+    opacity: 0
+    Behavior on opacity {
+        NumberAnimation { duration: 2000 }
+    }
+
+    Component.onCompleted: sizeHelper.opacity = 1
+
+    /* for some reason, this gif causes a terrible memory leak
+       tried to move it to here, since sddm just straight-up crashes
+       when it tries to loop the thing
+       no progress though -- the gif might be corrupted
+    AnimatedImage {
+        id: background
+        anchors.fill: parent
+        source: Qt.resolvedUrl("../lockscreen.gif")
+    }
+    */
 
     Rectangle {
         id: formBackground
@@ -53,7 +72,7 @@ Item {
 
     Loader {
         id: virtualKeyboard
-        source: "Components/VirtualKeyboard.qml"
+        source: "VirtualKeyboard.qml"
         state: "hidden"
         property bool keyboardActive: item ? item.active : false
         onKeyboardActiveChanged: keyboardActive ? state = "visible" : state = "hidden"
