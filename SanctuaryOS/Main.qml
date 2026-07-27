@@ -54,6 +54,10 @@ Pane {
         autoPlay: true
         z: 2
 
+        onStopped: {
+            loader.source = Qt.resolvedUrl("Components/MainForm.qml")
+        }
+
         Keys.onSpacePressed: {
             bootVideo.position = bootVideo.duration
             loader.source = Qt.resolvedUrl("Components/MainForm.qml")
@@ -63,6 +67,5 @@ Pane {
     Loader {
         id: loader
         anchors.fill: parent
-        source: bootVideo.position >= bootVideo.duration - 200 ? Qt.resolvedUrl("Components/MainForm.qml") : ""
     }
 }
