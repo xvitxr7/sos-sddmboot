@@ -62,6 +62,11 @@ Pane {
             bootVideo.position = bootVideo.duration
             loader.source = Qt.resolvedUrl("Components/MainForm.qml")
         }
+
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.BlankCursor
+        }
     }
 
     Loader {
